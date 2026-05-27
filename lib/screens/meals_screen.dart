@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:khuda_lagse/models/meal.dart';
+import 'package:khuda_lagse/widget/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
@@ -36,7 +37,7 @@ class MealsScreen extends StatelessWidget {
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (ctx, index) => Text(meals[0].title),
+        itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
       );
     }
 
