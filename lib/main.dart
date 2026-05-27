@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:khuda_lagse/categories_screen.dart';
+import 'package:khuda_lagse/screens/categories_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
     brightness: Brightness.light,
-    // seedColor: const Color.fromARGB(255, 131, 57, 0),
-    seedColor: Colors.white,
+    seedColor: const Color.fromARGB(255, 131, 57, 0),
   ),
   textTheme: GoogleFonts.latoTextTheme(),
 );
