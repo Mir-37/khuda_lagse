@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:udemy_flutter_6/categories_scrren.dart';
+import 'package:khuda_lagse/categories_scrren.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
