@@ -5,7 +5,7 @@ import 'package:khuda_lagse/widget/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
-  final String title;
+  final String? title;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
@@ -15,7 +15,7 @@ class MealsScreen extends StatelessWidget {
     );
   }
 
-  const MealsScreen({super.key, required this.meals, required this.title});
+  const MealsScreen({super.key, required this.meals, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +53,10 @@ class MealsScreen extends StatelessWidget {
         ),
       );
     }
-
+    if (title == null) return content;
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );
