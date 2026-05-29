@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:khuda_lagse/models/meal.dart';
+import 'package:khuda_lagse/screens/meal_details.dart';
 import 'package:khuda_lagse/widget/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
   final String title;
+
+  void _selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => SingleMealScreen(meal: meal),
+      ),
+    );
+  }
 
   const MealsScreen({super.key, required this.meals, required this.title});
 
@@ -37,7 +45,12 @@ class MealsScreen extends StatelessWidget {
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+        itemBuilder: (ctx, index) => MealItem(
+          meal: meals[index],
+          onSelectMeal: (meal) {
+            _selectMeal(context, meal);
+          },
+        ),
       );
     }
 
