@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khuda_lagse/models/meal.dart';
 import 'package:khuda_lagse/screens/categories_screen.dart';
+import 'package:khuda_lagse/screens/filters_screen.dart';
 import 'package:khuda_lagse/screens/meals_screen.dart';
 import 'package:khuda_lagse/widget/main_drawer.dart';
 
@@ -69,9 +70,15 @@ class _TabScreenState extends State<TabsScreen> {
     }
 
     void _setScreen(String identifier) {
+      Navigator.of(context).pop();
+
       if (identifier == 'filters') {
-      } else {
         Navigator.of(context).pop();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (ctx) => const FiltersScreen(),
+          ),
+        );
       }
     }
 
