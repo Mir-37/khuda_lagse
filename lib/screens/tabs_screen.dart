@@ -69,7 +69,7 @@ class _TabScreenState extends State<TabsScreen> {
       );
     }
 
-    void _setScreen(String identifier) {
+    void setScreen(String identifier) {
       Navigator.of(context).pop();
 
       if (identifier == 'filters') {
@@ -88,7 +88,7 @@ class _TabScreenState extends State<TabsScreen> {
       ),
       drawer: MainDrawer(
         onSelectScreen: (String identifier) {
-          _setScreen(identifier);
+          setScreen(identifier);
         },
       ),
       body: activePage,
