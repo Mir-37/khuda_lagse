@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:khuda_lagse/models/meal.dart';
 import 'package:khuda_lagse/screens/categories_screen.dart';
 import 'package:khuda_lagse/screens/meals_screen.dart';
+import 'package:khuda_lagse/widget/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -67,9 +68,21 @@ class _TabScreenState extends State<TabsScreen> {
       );
     }
 
+    void _setScreen(String identifier) {
+      if (identifier == 'filters') {
+      } else {
+        Navigator.of(context).pop();
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(activePageTitle),
+      ),
+      drawer: MainDrawer(
+        onSelectScreen: (String identifier) {
+          _setScreen(identifier);
+        },
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
