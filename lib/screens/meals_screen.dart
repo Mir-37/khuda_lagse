@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khuda_lagse/models/meal.dart';
-import 'package:khuda_lagse/screens/meal_details.dart';
+import 'package:khuda_lagse/screens/meal_details_screen.dart';
 import 'package:khuda_lagse/widget/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
