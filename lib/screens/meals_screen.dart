@@ -6,16 +6,25 @@ import 'package:khuda_lagse/widget/meal_item.dart';
 class MealsScreen extends StatelessWidget {
   final List<Meal> meals;
   final String? title;
+  final void Function(Meal meal) onToggleFavorite;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => MealDeatailsScreen(meal: meal),
+        builder: (ctx) => MealDeatailsScreen(
+          meal: meal,
+          onToggleFavorite: onToggleFavorite,
+        ),
       ),
     );
   }
 
-  const MealsScreen({super.key, required this.meals, this.title});
+  const MealsScreen({
+    super.key,
+    required this.meals,
+    this.title,
+    required this.onToggleFavorite,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:khuda_lagse/data/dummy_data.dart';
 import 'package:khuda_lagse/models/category.dart';
+import 'package:khuda_lagse/models/meal.dart';
 import 'package:khuda_lagse/screens/meals_screen.dart';
 import 'package:khuda_lagse/widget/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
-
+  const CategoriesScreen({super.key, required this.onToggleFavorite});
+  final void Function(Meal meal) onToggleFavorite;
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals = dummyMeals
         .where((meal) => meal.categories.contains(category.id))
@@ -14,8 +15,11 @@ class CategoriesScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) =>
-            MealsScreen(meals: filteredMeals, title: category.title),
+        builder: (ctx) => MealsScreen(
+          meals: filteredMeals,
+          title: category.title,
+          onToggleFavorite: onToggleFavorite,
+        ),
       ),
     );
   }
