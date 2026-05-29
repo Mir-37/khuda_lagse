@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:khuda_lagse/models/meal.dart';
-import 'package:khuda_lagse/widget/meal_item_trait.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-class SingleMealScreen extends StatelessWidget {
-  const SingleMealScreen({
+class MealDeatailsScreen extends StatelessWidget {
+  const MealDeatailsScreen({
     super.key,
     required this.meal,
   });
