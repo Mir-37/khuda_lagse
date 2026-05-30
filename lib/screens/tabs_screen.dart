@@ -6,6 +6,9 @@ import 'package:khuda_lagse/screens/filters_screen.dart';
 import 'package:khuda_lagse/screens/meals_screen.dart';
 import 'package:khuda_lagse/widget/main_drawer.dart';
 
+import 'package:khuda_lagse/providers/meals_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 const kInitialFilters = {
   Filter.glutenFree: false,
   Filter.lactoseFree: false,
@@ -13,16 +16,16 @@ const kInitialFilters = {
   Filter.vegan: false,
 };
 
-class TabsScreen extends StatefulWidget {
+class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<TabsScreen> createState() {
     return _TabScreenState();
   }
 }
 
-class _TabScreenState extends State<TabsScreen> {
+class _TabScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
   final List<Meal> _favoriteMeals = [];
@@ -61,7 +64,8 @@ class _TabScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableMeals = dummyMeals.where((meal) {
+    final meals = ref.watch(mealsProvider);
+    final availableMeals = meals.where((meal) {
       if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
