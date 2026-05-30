@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:khuda_lagse/data/dummy_data.dart';
-import 'package:khuda_lagse/models/meal.dart';
 import 'package:khuda_lagse/screens/categories_screen.dart';
 import 'package:khuda_lagse/screens/filters_screen.dart';
 import 'package:khuda_lagse/screens/meals_screen.dart';
 import 'package:khuda_lagse/widget/main_drawer.dart';
 
 import 'package:khuda_lagse/providers/meals_provider.dart';
+import 'package:khuda_lagse/providers/favorites_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const kInitialFilters = {
@@ -28,33 +27,7 @@ class TabsScreen extends ConsumerStatefulWidget {
 class _TabScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
-  final List<Meal> _favoriteMeals = [];
-
   Map<Filter, bool> _selectedFilters = kInitialFilters;
-
-  void _showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
-  void _toggleMealFavoriteStatus(Meal meal) {
-    final isExisting = _favoriteMeals.contains(meal);
-    if (isExisting) {
-      setState(() {
-        _favoriteMeals.remove(meal);
-        _showInfoMessage('Removed from favorites list');
-      });
-    } else {
-      setState(() {
-        _favoriteMeals.add(meal);
-        _showInfoMessage('Added to favorites list!');
-      });
-    }
-  }
 
   void _selectPage(int index) {
     setState(() {
@@ -81,21 +54,17 @@ class _TabScreenState extends ConsumerState<TabsScreen> {
       return true;
     }).toList();
     Widget activePage = CategoriesScreen(
-      onToggleFavorite: (Meal meal) {
-        _toggleMealFavoriteStatus(meal);
-      },
       availableMeals: availableMeals,
     );
 
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      final favoriteMeals = ref.watch(favoriteMealsProvider);
+
       activePageTitle = 'Your Favorites';
       activePage = MealsScreen(
-        meals: _favoriteMeals,
-        onToggleFavorite: (Meal meal) {
-          _toggleMealFavoriteStatus(meal);
-        },
+        meals: favoriteMeals,
       );
     }
 
