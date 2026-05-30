@@ -10,7 +10,9 @@ enum Filter {
 }
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key});
+  const FiltersScreen({super.key, required this.currentFilters});
+
+  final Map<Filter, bool> currentFilters;
 
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +25,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _lactoseFreeFilterSet = false;
   var _veganFilterSet = false;
   var _vegetarianFilterSet = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFreeFilterSet = widget.currentFilters[Filter.glutenFree]!;
+    _lactoseFreeFilterSet = widget.currentFilters[Filter.lactoseFree]!;
+    _veganFilterSet = widget.currentFilters[Filter.vegan]!;
+    _vegetarianFilterSet = widget.currentFilters[Filter.vegetarian]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +125,13 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 });
               },
               title: Text(
-                'Vegetarian-free',
+                'Vegetarian',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               subtitle: Text(
-                'Only include vegatirian-free meals.',
+                'Only include vegatirian meals.',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
@@ -139,13 +150,13 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 });
               },
               title: Text(
-                'Vegan-free',
+                'Vegan',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               subtitle: Text(
-                'Only include vegan-free meals.',
+                'Only include vegan meals.',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
